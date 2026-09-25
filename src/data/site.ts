@@ -180,74 +180,99 @@ export const collaborators: Person[] = [
 ]
 
 // ---------------------------------------------------------------------------
-// Calendar (from the proposal, "Work plan")
+// Calendar (from calendario_elevate.xlsx)
 // ---------------------------------------------------------------------------
 
-export interface Phase {
-  number: number
-  title: string
-  period: string
-  tasks: string[]
-}
+/** A task, or a task with sub-items. */
+export type Task = string | { title: string; items: string[] }
 
-export const workPlan: Phase[] = [
+export type ScheduleRow =
+  | { type: 'period'; phase: string; weeks: string; tasks: Task[] }
+  | { type: 'milestone'; phase: string; code: string; date: string }
+  | { type: 'event'; phase: string; date: string; tasks: Task[] }
+
+export const schedule: ScheduleRow[] = [
   {
-    number: 1,
-    title: 'Requirements & Planning',
-    period: 'October',
+    type: 'period',
+    phase: 'Inception',
+    weeks: '22/09 – 28/09',
     tasks: [
-      'Map the current inspection process through interviews with the CMA technical unit and the inspection company, and collect the applicable legal requirements on inspection periodicity.',
-      'Define platform scope, MVP priorities, and user requirements for the three user types (owner, municipal staff, inspection company).',
-      'Set up development workflow, tools, open-source licence, and responsibilities.',
+      'Project Website (Claudino)',
+      'Github Organization',
+      'Jira Project',
+      'Project Calendar (All)',
+      'Functionalities (Rodrigo)',
+      'Actors and Use Cases (Martim & Gonçalo)',
+      'Architecture design (Simão & Rodrigo)',
+      'State-of-the-art and Context (Martim & Claudino)',
+      'Presentation (All)',
+    ],
+  },
+  { type: 'milestone', phase: 'Inception', code: 'M1', date: '29/09' },
+  {
+    type: 'period',
+    phase: 'Elaboration',
+    weeks: '30/09 – 06/10',
+    tasks: [
+      'User Stories (All)',
+      'Functional Requirements (All)',
+      'Non-Functional Requirements (Simão)',
+      'Database Diagram (Gonçalo)',
     ],
   },
   {
-    number: 2,
-    title: 'System Design',
-    period: 'Early November',
+    type: 'period',
+    phase: 'Elaboration',
+    weeks: '06/10 – 12/10',
     tasks: [
-      'Design system architecture (backend, frontend, database, integration with the inspection company).',
-      'Define the elevator data model, the inspection state machine, and the rules for due dates and notices.',
-      'Draft wireframes and UI mockups for the request form, elevator register, and dashboard.',
+      'Design Mockups (Claudino & Martim)',
+      'Refined State-of-the-art (Martim)',
+      'Refined Architecture (Simão & Rodrigo)',
+      'Draft Technical Report',
+      'Presentation (All)',
     ],
   },
+  { type: 'milestone', phase: 'Elaboration', code: 'M2', date: '13/10' },
   {
-    number: 3,
-    title: 'MVP Implementation',
-    period: 'Mid November – December',
-    tasks: [
-      'Develop the core platform with the elevator register and the request intake form.',
-      'Deliver MVP in December with request-to-list generation for initial evaluation.',
-    ],
+    type: 'period',
+    phase: 'Construction',
+    weeks: '14/10 – 20/10',
+    tasks: ['Legal Requirements', 'Technical Risks', 'Risk Mitigation'],
   },
   {
-    number: 4,
-    title: 'Extended Implementation',
-    period: 'January – March',
+    type: 'period',
+    phase: 'Construction',
+    weeks: '20/10 – 02/11',
     tasks: [
-      'Expand with inspection scheduling and report sharing, periodicity control, automatic notices and payment prompts, and non-conformity handling.',
-      'Import the existing licence and request data; improve integration, usability, and performance.',
+      'SWOT Analyse',
+      'TOWS Matrix',
+      'PESTEL Analyse',
+      { title: 'Core', items: ['Database Models', 'Core Endpoints', 'Frontend'] },
     ],
   },
+  { type: 'milestone', phase: 'Construction', code: 'M3', date: '03/11' },
+  { type: 'period', phase: 'Transition', weeks: '04/11 – 17/11', tasks: ['MVP A Module'] },
+  { type: 'period', phase: 'Transition', weeks: '17/11 – 01/12', tasks: ['MVP B Module'] },
   {
-    number: 5,
-    title: 'Testing & Validation',
-    period: 'April',
-    tasks: [
-      'Perform thorough unit, integration, and acceptance testing.',
-      'Conduct user testing sessions with municipal staff and the inspection company on a real request cycle.',
-      'Apply improvements based on feedback.',
-    ],
+    type: 'period',
+    phase: 'Transition',
+    weeks: '01/12 – 14/12',
+    tasks: ['MVP Testing', 'Project Management Evaluation', 'Presentation'],
   },
+  { type: 'milestone', phase: 'Transition', code: 'M4', date: '15/12' },
+  { type: 'period', phase: 'Transition', weeks: '10/02 – 23/02', tasks: ['C Module'] },
+  { type: 'period', phase: 'Transition', weeks: '24/02 – 09/03', tasks: ['D Module'] },
+  { type: 'period', phase: 'Transition', weeks: '10/03 – 23/03', tasks: ['E Module'] },
+  { type: 'period', phase: 'Transition', weeks: '07/04 – 20/04', tasks: ['Testing & Bug Fixing'] },
+  { type: 'period', phase: 'Transition', weeks: '21/04 – 04/05', tasks: ['User Testing', 'Enhance Features'] },
+  { type: 'period', phase: 'Transition', weeks: '04/05 – 18/05', tasks: ['Data Collection & Analytics', 'Stabilize Final Product'] },
+  { type: 'period', phase: 'Transition', weeks: '19/05 – 25/05', tasks: ['Project Documentation'] },
+  { type: 'period', phase: 'Transition', weeks: '26/05 – 01/06', tasks: ['Final Presentation'] },
   {
-    number: 6,
-    title: 'Deployment & Documentation',
-    period: 'May',
-    tasks: [
-      'Deploy prototype in a controlled environment at the municipality.',
-      'Deliver user documentation and training materials.',
-      'Present final system and recommendations for future iterations.',
-    ],
+    type: 'event',
+    phase: 'Transition',
+    date: '04/06',
+    tasks: [{ title: 'STUDENTS@DETI', items: ['Demo', 'Poster', 'Video', 'Technical Report'] }],
   },
 ]
 
