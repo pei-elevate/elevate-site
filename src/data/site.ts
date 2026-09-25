@@ -299,9 +299,11 @@ export interface Milestone {
   /** Canva "Embed" URL (Share → More → Embed → copy the src). Leave as a placeholder to show an empty frame. */
   canvaEmbedUrl: string
   sections: MilestoneSection[]
+  /** Hide from the site while the milestone is still in progress. */
+  hidden?: boolean
 }
 
-export const milestones: Milestone[] = [
+const allMilestones: Milestone[] = [
   {
     id: 'm1',
     code: 'M1',
@@ -388,6 +390,7 @@ export const milestones: Milestone[] = [
   },
   {
     id: 'm2',
+    hidden: true,
     code: 'M2',
     name: 'Elaboration',
     summary: 'System architecture, data model, requirements and mockups.',
@@ -401,6 +404,7 @@ export const milestones: Milestone[] = [
   },
   {
     id: 'm3',
+    hidden: true,
     code: 'M3',
     name: 'Construction',
     summary: 'Implementation of the MVP and the extended features.',
@@ -413,6 +417,7 @@ export const milestones: Milestone[] = [
   },
   {
     id: 'm4',
+    hidden: true,
     code: 'M4',
     name: 'Transition',
     summary: 'Testing with the CMA, deployment and final documentation.',
@@ -425,10 +430,13 @@ export const milestones: Milestone[] = [
   },
 ]
 
+export const milestones = allMilestones.filter((m) => !m.hidden)
+
 // ---------------------------------------------------------------------------
 // Documentation
 // ---------------------------------------------------------------------------
 
+/** Not shown yet: the Documentation page only lists the proposal until the contents are agreed with the advisors. */
 export const documentation = [
   {
     id: 'architecture',

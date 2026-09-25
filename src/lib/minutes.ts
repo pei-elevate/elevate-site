@@ -9,6 +9,11 @@ export interface Minute {
   number: number
   date: string
   title: string
+  location: string
+  time: string
+  duration: string
+  /** Path to the PDF in public/, e.g. "minutes/ata-01.pdf". */
+  pdf: string
   body: string
 }
 
@@ -47,6 +52,10 @@ export const minutes: Minute[] = Object.entries(files)
       number: Number(data.number) || Number(/\d+/.exec(file)?.[0]) || 0,
       date: data.date ?? '',
       title: data.title ?? heading ?? file,
+      location: data.location ?? '',
+      time: data.time ?? '',
+      duration: data.duration ?? '',
+      pdf: data.pdf ?? '',
       body,
     }
   })
