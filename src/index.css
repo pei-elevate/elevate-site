@@ -1,0 +1,141 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+
+  --color-petrol: #0f4c5c;
+  --color-petrol-600: #0b3d4a;
+  --color-accent: #ffc857;
+  /* Secondary deep blue. It equals the dark-mode page background, so the
+     .dark rule below swaps it for a light tint of the same hue. */
+  --color-secondary: #092e40;
+  --color-offwhite: #f7f9f9;
+
+  /* Dark mode surfaces, derived from petrol (base matches logo_dark.png background) */
+  --color-deep: #092e40;
+  --color-deep-card: #0c3d50;
+  --color-deep-line: #16505f;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.dark {
+  --color-secondary: #9db7c6;
+}
+
+body {
+  @apply bg-offwhite text-slate-800 antialiased dark:bg-deep dark:text-offwhite;
+  font-family: var(--font-sans);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Home hero: strikethrough on the problem, yellow highlight on the result.
+   Final state is the default; animations only run without reduced motion.
+   --------------------------------------------------------------------------- */
+
+.hero-strike {
+  position: relative;
+  white-space: nowrap;
+}
+
+.hero-strike::after {
+  content: '';
+  position: absolute;
+  left: -0.04em;
+  right: -0.04em;
+  top: 54%;
+  height: 0.075em;
+  border-radius: 9999px;
+  background: var(--color-accent);
+  transform-origin: left center;
+}
+
+/* The result turns yellow; it animates from the headline colour of each theme. */
+.hero-mark {
+  --hero-mark-from: var(--color-petrol);
+  color: var(--color-accent);
+  white-space: nowrap;
+}
+
+.dark .hero-mark {
+  --hero-mark-from: var(--color-offwhite);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-rise {
+    animation: hero-rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation-delay: var(--hero-delay, 0ms);
+  }
+
+  .hero-strike::after {
+    animation: hero-draw 0.5s ease-out 0.8s both;
+  }
+
+  .hero-mark {
+    animation: hero-color 0.5s ease-out 1.3s both;
+  }
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+@keyframes hero-draw {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes hero-color {
+  from {
+    color: var(--hero-mark-from);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Page and menu transitions (skipped with reduced motion).
+   --------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  .page-enter {
+    animation: page-enter 0.35s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+
+  .menu-enter {
+    animation: menu-enter 0.18s ease-out both;
+    transform-origin: top;
+  }
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+@keyframes menu-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+}
