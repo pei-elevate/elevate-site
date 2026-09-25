@@ -53,8 +53,10 @@ In Canva: **Share → More → Embed**, copy the `src` URL from the embed code a
 
 ## Deploy
 
-Deployment is automatic: `.github/workflows/deploy.yml` builds the site and publishes it to GitHub Pages on every push to `main`.
+After GitHub Pages is enabled, `.github/workflows/deploy.yml` installs dependencies, builds the site and publishes it on every push to `main`. It can also be run manually from the Actions tab.
 
 One-time setup in the GitHub repository: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
 
 The site uses a relative base (`base: './'` in `vite.config.ts`) and hash routes, so it works both on `https://<org>.github.io/` and on `https://<org>.github.io/<repo>/` without changes.
+
+For this repository, the expected address is `https://pei-elevate.github.io/elevate-site/#/`.
