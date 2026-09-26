@@ -5,8 +5,8 @@ interface LogoProps {
 }
 
 /**
- * Logo for the current theme. public/logos/*.webp are cropped, resized copies of
- * logos/logo_white.png (white background) and logos/logo_dark.png (#092E40 background).
+ * Logo for the current theme. public/logos/*.webp are transparent crops of
+ * logos/logo_light_pfp_nobg.png (the dark variant has the text recoloured to white).
  */
 export function Logo({ className = 'w-32' }: LogoProps) {
   const { theme } = useTheme()
