@@ -126,13 +126,6 @@ export const team: Person[] = [
     linkedin: 'https://www.linkedin.com/in/claudinomartins/',
   },
   {
-    name: 'Simão Pinto',
-    role: 'Student',
-    photo: '[PHOTO]',
-    github: 'https://github.com/SimaoPinto999',
-    linkedin: 'https://www.linkedin.com/in/simaopinto06/',
-  },
-  {
     name: 'Gonçalo Vila',
     role: 'Student',
     photo: '[PHOTO]',
@@ -150,6 +143,13 @@ export const team: Person[] = [
     photo: '[PHOTO]',
     github: 'https://github.com/xutaa',
     linkedin: 'https://www.linkedin.com/in/rodrigosimoes1/',
+  },
+  {
+    name: 'Simão Pinto',
+    role: 'Student',
+    photo: '[PHOTO]',
+    github: 'https://github.com/SimaoPinto999',
+    linkedin: 'https://www.linkedin.com/in/simaopinto06/',
   },
 ]
 
