@@ -7,8 +7,8 @@ import { cardClass } from './Section'
 /** Plain feature rectangle: title only, fills with petrol on hover. */
 export function FeatureCard({ feature }: { feature: Feature }) {
   return (
-    <article className="group relative flex h-full min-h-36 items-center overflow-hidden rounded-lg border border-slate-200 bg-white px-8 py-10 motion-safe:transition-[transform,background-color,border-color,box-shadow] motion-safe:duration-300 hover:border-petrol hover:bg-petrol hover:shadow-xl hover:shadow-petrol/20 motion-safe:hover:-translate-y-1.5 sm:min-h-44 dark:border-deep-line dark:bg-deep-card dark:hover:border-accent/60 dark:hover:bg-petrol">
-      <h3 className="text-3xl leading-tight font-bold tracking-tight text-petrol transition-colors duration-300 group-hover:text-white sm:text-4xl dark:text-offwhite">
+    <article className="group relative flex h-full min-h-24 items-center overflow-hidden rounded-lg border border-slate-200 bg-white px-6 py-6 motion-safe:transition-[transform,background-color,border-color,box-shadow] motion-safe:duration-300 hover:border-petrol hover:bg-petrol hover:shadow-xl hover:shadow-petrol/20 motion-safe:hover:-translate-y-1.5 sm:min-h-28 dark:border-deep-line dark:bg-deep-card dark:hover:border-accent/60 dark:hover:bg-petrol">
+      <h3 className="text-xl leading-tight font-bold tracking-tight text-petrol transition-colors duration-300 group-hover:text-white sm:text-2xl dark:text-offwhite">
         {feature.title}
       </h3>
       <span

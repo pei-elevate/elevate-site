@@ -72,34 +72,31 @@ export const features: Feature[] = [
       'Identification, location, building and owner, installation licence, inspection history and current status, imported from urban planning licences and the daily request intake.',
   },
   {
-    title: 'Request Intake',
+    title: 'Inspection Request Management',
     description:
       'Online form for condominiums and owners to submit inspection requests, with validation, automatic linking to the elevator record, and multi-criteria search and filtering.',
   },
   {
-    title: 'Inspection Scheduling & Sharing',
+    title: 'Inspection Scheduling and Sharing',
     description:
       'Automatic generation of the request list for the inspection company, with a shared portal or export where the company confirms dates, assigns technicians and uploads reports.',
   },
   {
-    title: 'Periodicity & Notices',
+    title: 'Inspection Periodicity and Notices',
     description:
       'Due-date calculation per elevator, reminders, automatic generation of the official notice (ofício) when an inspection is due or overdue, and a prompt for the fee payment.',
   },
   {
-    title: 'Non-conformity Handling',
+    title: 'Non-Conformity Management',
     description:
       'Workflow for failed inspections (re-inspection deadline, interdiction notice) and for on-site complaints reported at the elevator, linked to the elevator record.',
   },
   {
-    title: 'Dashboard & Indicators',
+    title: 'Dashboard and Performance Indicators',
     description:
       'Elevators by status, overdue inspections, requests per period, approval rate and average time from request to report, for municipal staff and management.',
   },
 ]
-
-/** Features shown on the home page (the first four for now). */
-export const homeFeatures = features.slice(0, 4)
 
 // ---------------------------------------------------------------------------
 // People

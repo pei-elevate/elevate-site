@@ -2,7 +2,7 @@ import { ArrowDown, ImageIcon } from 'lucide-react'
 import type { CSSProperties } from 'react'
 import { FeatureCard } from '../components/Cards'
 import { Section } from '../components/Section'
-import { hero, homeFeatures } from '../data/site'
+import { features, hero } from '../data/site'
 import { useTheme } from '../lib/theme'
 
 // Hero illustrations: 1.png for light mode, 2.png for dark mode. Missing files fall back to a placeholder.
@@ -68,8 +68,8 @@ export function Home() {
 
       {/* Features */}
       <Section id="features" eyebrow="What it does" title="Features">
-        <ul className="grid gap-5 sm:grid-cols-2">
-          {homeFeatures.map((f) => (
+        <ul className="grid gap-4 sm:grid-cols-2">
+          {features.map((f) => (
             <li key={f.title}>
               <FeatureCard feature={f} />
             </li>
