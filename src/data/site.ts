@@ -136,6 +136,7 @@ export const team: Person[] = [
     role: 'Student',
     photo: '[PHOTO]',
     github: 'https://github.com/mtravesso',
+    linkedin: 'https://www.linkedin.com/in/martimtravessodias/',
   },
   {
     name: 'Rodrigo Simões',
