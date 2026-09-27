@@ -290,7 +290,7 @@ export interface MilestoneSection {
   /** Grouped lists by category (used for use cases by actor). */
   groups?: { title: string; items: string[] }[]
   /** Optional image (e.g. for State of the Art diagram or chart). */
-  image?: { src: string; alt: string; caption?: string }
+  image?: { src: string; alt: string; width?: number; height?: number; caption?: string }
 }
 
 export interface Milestone {
@@ -416,9 +416,10 @@ const allMilestones: Milestone[] = [
       {
         title: 'High-Level Architecture',
         image: {
-          // Mano Simão, mete aqui o path da imagem =)
-          src: '',
+          src: './images/arquitetura_ms1.jpg',
           alt: 'High-Level Architecture',
+          width: 302,
+          height: 512,
         },
       },
     ],

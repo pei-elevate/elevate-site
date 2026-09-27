@@ -84,11 +84,16 @@ function SectionBlock({ section }: { section: MilestoneSection }) {
           </div>
         )}
         {section.image?.src && (
-          <figure className="mt-4 overflow-hidden rounded-xl border border-slate-200 bg-white p-2 dark:border-deep-line dark:bg-deep-card">
+          <figure
+            className="mt-4 w-full overflow-hidden rounded-xl border border-slate-200 bg-white p-2 dark:border-deep-line dark:bg-deep-card"
+            style={section.image.width ? { maxWidth: section.image.width + 18 } : undefined}
+          >
             <img
               src={section.image.src.startsWith('/') ? `.${section.image.src}` : section.image.src}
               alt={section.image.alt}
-              className="w-full rounded-lg object-contain"
+              width={section.image.width}
+              height={section.image.height}
+              className="h-auto w-full rounded-lg object-contain"
               loading="lazy"
             />
             {section.image.caption && (
