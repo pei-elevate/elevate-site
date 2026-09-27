@@ -407,7 +407,7 @@ const allMilestones: Milestone[] = [
       {
         title: 'State of the Art',
         image: {
-          src: '/images/sota.png',
+          src: './images/sota.png',
           alt: 'State of the Art comparison',
         },
       },

@@ -86,7 +86,7 @@ function SectionBlock({ section }: { section: MilestoneSection }) {
         {section.image && (
           <figure className="mt-4 overflow-hidden rounded-xl border border-slate-200 bg-white p-2 dark:border-deep-line dark:bg-deep-card">
             <img
-              src={section.image.src}
+              src={section.image.src.startsWith('/') ? `.${section.image.src}` : section.image.src}
               alt={section.image.alt}
               className="w-full rounded-lg object-contain"
               loading="lazy"
