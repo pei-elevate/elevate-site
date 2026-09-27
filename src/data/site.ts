@@ -318,13 +318,7 @@ const allMilestones: Milestone[] = [
       {
         title: 'Goal',
         body: [
-          'Develop a functional prototype of an elevator inspection management platform adapted to the procedures of the Câmara Municipal de Aveiro.',
-        ],
-        items: [
-          'Build and maintain a register of the elevators in the municipality, populated from incoming requests and from urban planning licences.',
-          'Digitise the full inspection lifecycle, from the request form to the inspection report, so that the data flows without re-typing between owners, the municipality, and the inspection company.',
-          'Enforce the inspection periodicity through automatic deadlines, official notices, and payment prompts, replacing the current informal warnings.',
-          'Publish the platform as open source so that other municipalities with the same obligation can adopt it.',
+          "Develop a system to manage the municipality's elevators, from their registration to inspection requests and follow-up.",
         ],
       },
       {
