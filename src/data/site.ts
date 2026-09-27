@@ -341,7 +341,15 @@ const allMilestones: Milestone[] = [
       {
         title: 'Expected Results',
         body: [
-          'An open-source platform that keeps a register of elevators, receives requests, tracks the full inspection lifecycle shared with the inspection company, and automatically issues the official notice (ofício) and payment prompt when an inspection falls due, including the handling of failed inspections and on-site complaints.',
+          'An open-source platform designed to digitise and streamline municipal elevator management, delivering the following core capabilities:',
+        ],
+        items: [
+          'Manage elevator data and inspection history.',
+          'Submit and manage inspection requests.',
+          'Schedule inspections and coordinate with the inspection company.',
+          'Track deadlines and generate notices.',
+          'Workflow for failed inspections, re-inspection deadlines, interdiction notices and complaints.',
+          'Monitor status, delays, and performance.',
         ],
       },
       {
