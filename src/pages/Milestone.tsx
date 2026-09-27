@@ -83,7 +83,7 @@ function SectionBlock({ section }: { section: MilestoneSection }) {
             ))}
           </div>
         )}
-        {section.image && (
+        {section.image?.src && (
           <figure className="mt-4 overflow-hidden rounded-xl border border-slate-200 bg-white p-2 dark:border-deep-line dark:bg-deep-card">
             <img
               src={section.image.src.startsWith('/') ? `.${section.image.src}` : section.image.src}

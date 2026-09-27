@@ -353,6 +353,13 @@ const allMilestones: Milestone[] = [
         ],
       },
       {
+        title: 'State of the Art',
+        image: {
+          src: './images/sota.png',
+          alt: 'State of the Art comparison',
+        },
+      },
+      {
         title: 'Actors',
         cards: [
           {
@@ -407,10 +414,11 @@ const allMilestones: Milestone[] = [
         ],
       },
       {
-        title: 'State of the Art',
+        title: 'High-Level Architecture',
         image: {
-          src: './images/sota.png',
-          alt: 'State of the Art comparison',
+          // Mano Simão, mete aqui o path da imagem =)
+          src: '',
+          alt: 'High-Level Architecture',
         },
       },
     ],
