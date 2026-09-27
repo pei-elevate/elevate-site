@@ -312,7 +312,7 @@ const allMilestones: Milestone[] = [
     code: 'M1',
     name: 'Inception',
     summary: 'Project vision, problem, actors, use cases and state of the art.',
-    date: '[M1 DATE]',
+    date: '29/09/2026',
     canvaEmbedUrl: 'https://www.canva.com/design/DAHWNwlLkFQ/OizVpoIOpeHJMS35WrAGVA/view?embed',
     sections: [
       {
