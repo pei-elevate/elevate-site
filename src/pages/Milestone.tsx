@@ -58,6 +58,31 @@ function SectionBlock({ section }: { section: MilestoneSection }) {
             ))}
           </ul>
         )}
+        {section.groups && (
+          <div className="space-y-6 pt-2">
+            {section.groups.map((group) => (
+              <div key={group.title} className="space-y-3">
+                <h3 className="text-lg font-semibold text-secondary">{group.title}</h3>
+                <ul className="list-disc space-y-2 pl-5 marker:text-accent">
+                  {group.items.map((item) => {
+                    const colonIndex = item.indexOf(': ')
+                    if (colonIndex !== -1) {
+                      const name = item.slice(0, colonIndex)
+                      const desc = item.slice(colonIndex + 2)
+                      return (
+                        <li key={item}>
+                          <strong className="font-semibold text-slate-900 dark:text-offwhite">{name}:</strong>{' '}
+                          <span>{desc}</span>
+                        </li>
+                      )
+                    }
+                    return <li key={item}>{item}</li>
+                  })}
+                </ul>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   )

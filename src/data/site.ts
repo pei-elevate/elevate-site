@@ -287,6 +287,8 @@ export interface MilestoneSection {
   items?: string[]
   /** Titled cards (used for actors). */
   cards?: { title: string; description: string }[]
+  /** Grouped lists by category (used for use cases by actor). */
+  groups?: { title: string; items: string[] }[]
 }
 
 export interface Milestone {
@@ -350,35 +352,54 @@ const allMilestones: Milestone[] = [
         title: 'Actors',
         cards: [
           {
-            title: 'Owner / Condominium',
+            title: 'Elevator Owner',
             description:
-              'Submits inspection requests through the online form and receives official notices and payment prompts when an inspection is due.',
+              'Private owners and condominium managers responsible for registered elevators.',
           },
           {
-            title: 'Municipal Staff',
+            title: 'CMA Staff',
             description:
-              'Manages the elevator register, reviews requests, generates the list for the inspection company, and follows deadlines, notices and non-conformities.',
+              'Municipal technical unit in charge of elevator registries, compliance monitoring, and inspection tracking.',
           },
           {
             title: 'Inspection Company',
             description:
-              'Receives the request list, confirms inspection dates, assigns technicians and uploads inspection reports.',
+              'External certified inspection entities and technicians performing periodic and extraordinary inspections.',
           },
         ],
       },
       {
         title: 'Use Cases',
-        body: ['[USE CASES – to be defined. Candidate use cases taken from the proposal:]'],
-        items: [
-          'Submit an inspection request (Owner / Condominium).',
-          'Register and update an elevator record (Municipal Staff).',
-          'Search and filter requests by status, location, due date, owner and result (Municipal Staff).',
-          'Generate and share the request list with the inspection company (Municipal Staff).',
-          'Confirm inspection dates and assign technicians (Inspection Company).',
-          'Upload an inspection report (Inspection Company).',
-          'Issue the official notice (ofício) and payment prompt when an inspection is due (Municipal Staff).',
-          'Handle a failed inspection or an on-site complaint (Municipal Staff).',
-          'Consult the dashboard indicators (Municipal Staff).',
+        groups: [
+          {
+            title: 'Elevator Owner',
+            items: [
+              'Register Elevator: Register elevators and submit technical specifications/installation licenses.',
+              'Submit an inspection request: Request periodic or extraordinary inspections directly through an online form.',
+              'Check request / inspection status: Monitor the real-time progress of requests, scheduled inspection dates, and approval results.',
+              'Receive notices and payment prompts: Receive automated legal notices before deadlines expire, along with fee payment details.',
+            ],
+          },
+          {
+            title: 'CMA Staff',
+            items: [
+              'Register and manage elevators: Manually add or update elevator profiles and import historical installation licences.',
+              'Review and validate elevator registration: Audit and validate new elevator registrations submitted by owners.',
+              'Review and validate inspection requests: Validate incoming inspection requests before dispatching them to the inspection company.',
+              'Track inspection status and deadlines: Control inspection progress and ensure legal periodicity deadlines are met.',
+              'Manage failed inspections and re-inspections: Handle non-conformities, re-inspection deadlines, and interdiction notices when safety requirements are not met.',
+              'Search and filter elevators / inspections: Search and filter through records by location, status, owner, or inspection date.',
+              'View indicators and operational statistics: Access analytical dashboards showing approval rates, delays, backlog, and performance metrics.',
+            ],
+          },
+          {
+            title: 'Inspection Company',
+            items: [
+              'View assigned inspection requests: Access the digital list of pending requests assigned and validated by the CMA.',
+              'Confirm inspection dates: Set and confirm scheduling slots and assign certified technicians for field visits.',
+              'Submit inspection results and reports: Upload inspection reports, issue digital certificates, and log non-compliance findings directly into the system.',
+            ],
+          },
         ],
       },
       {
