@@ -83,6 +83,21 @@ function SectionBlock({ section }: { section: MilestoneSection }) {
             ))}
           </div>
         )}
+        {section.image && (
+          <figure className="mt-4 overflow-hidden rounded-xl border border-slate-200 bg-white p-2 dark:border-deep-line dark:bg-deep-card">
+            <img
+              src={section.image.src}
+              alt={section.image.alt}
+              className="w-full rounded-lg object-contain"
+              loading="lazy"
+            />
+            {section.image.caption && (
+              <figcaption className="mt-2 text-center text-sm text-slate-500 dark:text-slate-400">
+                {section.image.caption}
+              </figcaption>
+            )}
+          </figure>
+        )}
       </div>
     </section>
   )

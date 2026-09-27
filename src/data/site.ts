@@ -289,6 +289,8 @@ export interface MilestoneSection {
   cards?: { title: string; description: string }[]
   /** Grouped lists by category (used for use cases by actor). */
   groups?: { title: string; items: string[] }[]
+  /** Optional image (e.g. for State of the Art diagram or chart). */
+  image?: { src: string; alt: string; caption?: string }
 }
 
 export interface Milestone {
@@ -404,7 +406,10 @@ const allMilestones: Milestone[] = [
       },
       {
         title: 'State of the Art',
-        body: ['[STATE OF THE ART – comparison with existing solutions]'],
+        image: {
+          src: '/images/sota.png',
+          alt: 'State of the Art comparison',
+        },
       },
     ],
   },
