@@ -242,9 +242,9 @@ export const schedule: ScheduleRow[] = [
     phase: 'Construction',
     weeks: '20/10 – 02/11',
     tasks: [
-      'SWOT Analyse',
+      'SWOT Analysis',
       'TOWS Matrix',
-      'PESTEL Analyse',
+      'PESTEL Analysis',
       'MVP Elevator Registry',
       'MVP Inspections Lifecycle',
     ],
