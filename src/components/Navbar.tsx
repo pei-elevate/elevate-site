@@ -144,7 +144,7 @@ export function Navbar() {
       className={`sticky top-0 z-40 border-b motion-safe:transition-[background-color,box-shadow,border-color] motion-safe:duration-300 ${
         scrolled || open
           ? 'border-slate-200 bg-white/85 shadow-md shadow-petrol/5 backdrop-blur-md dark:border-deep-line dark:bg-deep/85 dark:shadow-black/30'
-          : 'border-transparent bg-white dark:bg-deep'
+          : 'border-slate-200 bg-white dark:border-transparent dark:bg-deep'
       }`}
     >
       <nav aria-label="Main" className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">

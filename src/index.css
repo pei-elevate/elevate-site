@@ -140,3 +140,24 @@ body {
     transform: translateY(-6px) scale(0.98);
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Scroll reveal: elements with .reveal slide in when they enter the viewport
+   (see src/lib/reveal.ts). Skipped with reduced motion.
+   --------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translate(var(--reveal-x, 0), 24px);
+    transition:
+      opacity 0.6s ease-out,
+      transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}

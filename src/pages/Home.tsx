@@ -3,6 +3,7 @@ import type { CSSProperties } from 'react'
 import { FeatureCard } from '../components/Cards'
 import { Section } from '../components/Section'
 import { features, hero } from '../data/site'
+import { useReveal } from '../lib/reveal'
 import { useTheme } from '../lib/theme'
 
 // Hero illustrations: 1.png for light mode, 2.png for dark mode. Missing files fall back to a placeholder.
@@ -26,6 +27,7 @@ function HeroIllustration() {
 }
 
 export function Home() {
+  const featuresRef = useReveal<HTMLUListElement>()
   const scrollToFeatures = () => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })
 
   return (
@@ -67,10 +69,17 @@ export function Home() {
       </section>
 
       {/* Features */}
-      <Section id="features" eyebrow="What it does" title="Features">
-        <ul className="grid gap-4 sm:grid-cols-2">
-          {features.map((f) => (
-            <li key={f.title}>
+      <Section id="features" eyebrow="What it does" title="Features" className="overflow-x-clip">
+        <ul ref={featuresRef} className="grid gap-4 sm:grid-cols-2">
+          {features.map((f, i) => (
+            <li
+              key={f.title}
+              className="reveal"
+              // Left column slides in from the left, right column from the right; rows cascade.
+              style={
+                { '--reveal-x': i % 2 ? '40px' : '-40px', '--reveal-delay': `${Math.floor(i / 2) * 100 + (i % 2) * 120}ms` } as CSSProperties
+              }
+            >
               <FeatureCard feature={f} />
             </li>
           ))}

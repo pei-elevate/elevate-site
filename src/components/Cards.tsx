@@ -50,12 +50,14 @@ function SocialLinks({ person }: { person: Person }) {
 export function ProfileCard({ person }: { person: Person }) {
   const hasPhoto = !isPlaceholder(person.photo)
   return (
-    <article className={`${cardClass.replace('p-6', '')} flex h-full flex-col overflow-hidden text-center`}>
+    <article
+      className={`${cardClass.replace('p-6', '')} group flex h-full flex-col overflow-hidden text-center motion-safe:transition-[transform,box-shadow] motion-safe:duration-300 hover:shadow-xl hover:shadow-petrol/15 motion-safe:hover:scale-105 motion-safe:focus-within:scale-105 dark:hover:shadow-black/30`}
+    >
       {hasPhoto ? (
         <img
           src={person.photo}
           alt={`Photo of ${person.name}`}
-          className="aspect-[4/5] w-full object-cover"
+          className="aspect-[4/5] w-full object-cover motion-safe:transition-transform motion-safe:duration-500 motion-safe:group-hover:scale-110"
           loading="lazy"
         />
       ) : (
@@ -64,11 +66,16 @@ export function ProfileCard({ person }: { person: Person }) {
           aria-label={`Photo placeholder for ${person.name}`}
           className="grid aspect-[4/5] w-full place-items-center bg-secondary/15 text-secondary"
         >
-          <User size={56} strokeWidth={1.5} aria-hidden="true" />
+          <User
+            size={56}
+            strokeWidth={1.5}
+            aria-hidden="true"
+            className="motion-safe:transition-transform motion-safe:duration-500 motion-safe:group-hover:scale-110"
+          />
         </span>
       )}
       <div
-        className="flex flex-1 flex-col items-center border-t-4 border-secondary px-4 py-5"
+        className="flex flex-1 flex-col items-center border-t-4 border-secondary px-4 py-5 transition-colors duration-300 group-hover:border-accent"
       >
         <h3 className="text-lg font-semibold text-petrol dark:text-offwhite">
           {person.name}
