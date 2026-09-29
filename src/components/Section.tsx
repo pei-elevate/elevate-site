@@ -39,7 +39,7 @@ export function PageHeader({ title, intro }: { title: string; intro?: ReactNode 
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
         <h1 className="text-4xl font-semibold text-petrol sm:text-5xl dark:text-offwhite">{title}</h1>
         <span aria-hidden="true" className="mt-4 block h-1 w-14 rounded-full bg-accent" />
-        {intro && <div className="mt-5 max-w-2xl text-lg text-slate-600 dark:text-slate-300">{intro}</div>}
+        {intro && <div className="mt-5 max-w-4xl text-lg text-slate-600 dark:text-slate-300">{intro}</div>}
       </div>
     </div>
   )
