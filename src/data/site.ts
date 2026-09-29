@@ -312,7 +312,8 @@ const allMilestones: Milestone[] = [
     id: 'm1',
     code: 'M1',
     name: 'Inception',
-    summary: 'Project vision, problem, expected results, state of the art, actors, use cases and high-level architecture.',
+    summary:
+      'Project Vision, Problem, Expected Results, State of the Art, Actors, Functional Requirements, Non Functional Requirements and High-level Architecture.',
     date: '29/09/2026',
     canvaEmbedUrl: 'https://www.canva.com/design/DAHWNwlLkFQ/OizVpoIOpeHJMS35WrAGVA/view?embed',
     sections: [
@@ -381,7 +382,7 @@ const allMilestones: Milestone[] = [
         ],
       },
       {
-        title: 'Use Cases',
+        title: 'Functional Requirements',
         groups: [
           {
             title: 'Elevator Owner',
@@ -412,6 +413,14 @@ const allMilestones: Milestone[] = [
               'Submit inspection results and reports: Upload inspection reports, issue digital certificates, and log non-compliance findings directly into the system.',
             ],
           },
+        ],
+      },
+      {
+        title: 'Non Functional Requirements',
+        items: [
+          'Legal deadlines correctly enforced.',
+          'Applicable elevator inspection regulations compliant.',
+          'Preserve data integrity by preventing duplicate and lost records.',
         ],
       },
       {
