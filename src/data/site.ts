@@ -216,7 +216,7 @@ export const schedule: ScheduleRow[] = [
       'User Stories (All)',
       'Functional Requirements (All)',
       'Non-Functional Requirements (Simão)',
-      'Database Diagram (Gonçalo)',
+      'Database Diagram (Claudino & Gonçalo)',
     ],
   },
   {
