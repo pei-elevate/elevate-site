@@ -117,35 +117,30 @@ export interface Person {
 export const team: Person[] = [
   {
     name: 'Claudino Martins',
-    role: 'Student',
     photo: './team/claudino.webp',
     github: 'https://github.com/dino3111',
     linkedin: 'https://www.linkedin.com/in/claudinomartins/',
   },
   {
     name: 'Gonçalo Vila',
-    role: 'Student',
     photo: './team/goncalo.webp',
     github: 'https://github.com/goncalovila',
     linkedin: 'https://www.linkedin.com/in/gon%C3%A7alo-figueiredo-212347410/',
   },
   {
     name: 'Martim Dias',
-    role: 'Student',
     photo: './team/martim.webp',
     github: 'https://github.com/mtravesso',
     linkedin: 'https://www.linkedin.com/in/martimtravessodias/',
   },
   {
     name: 'Rodrigo Simões',
-    role: 'Student',
     photo: './team/rodrigo.webp',
     github: 'https://github.com/xutaa',
     linkedin: 'https://www.linkedin.com/in/rodrigosimoes1/',
   },
   {
     name: 'Simão Pinto',
-    role: 'Student',
     photo: './team/simao.webp',
     github: 'https://github.com/SimaoPinto999',
     linkedin: 'https://www.linkedin.com/in/simaopinto06/',
