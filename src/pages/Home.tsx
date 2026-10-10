@@ -1,40 +1,21 @@
-import { ArrowDown, ImageIcon } from 'lucide-react'
-import type { CSSProperties } from 'react'
+import { ArrowDown } from 'lucide-react'
+import { useRef, type CSSProperties } from 'react'
 import { FeatureCard } from '../components/Cards'
+import { ElevatorIllustration } from '../components/Elevator'
 import { Section } from '../components/Section'
 import { features, hero } from '../data/site'
 import { useReveal } from '../lib/reveal'
-import { useTheme } from '../lib/theme'
-
-// Hero illustrations: 1.png for light mode, 2.png for dark mode. Missing files fall back to a placeholder.
-const heroImages = import.meta.glob<string>('../assets/hero.svg/*.png', { eager: true, query: '?url', import: 'default' })
-const heroLight = heroImages['../assets/hero.svg/1.png']
-const heroDark = heroImages['../assets/hero.svg/2.png']
-
-function HeroIllustration() {
-  const { theme } = useTheme()
-  const src = theme === 'dark' ? (heroDark ?? heroLight) : (heroLight ?? heroDark)
-  if (src) return <img src={src} alt="" className="aspect-square h-auto w-full rounded-3xl object-cover" />
-  return (
-    <div className="grid aspect-[4/3] w-full place-items-center rounded-3xl border-2 border-dashed border-slate-300 bg-offwhite text-center text-slate-500 dark:border-deep-line dark:bg-deep-card dark:text-slate-400">
-      <div className="p-6">
-        <ImageIcon size={40} strokeWidth={1.5} aria-hidden="true" className="mx-auto mb-3 text-secondary" />
-        <p className="text-sm font-medium">[HERO ILLUSTRATION]</p>
-        <p className="mt-1 text-xs">{hero.illustration}</p>
-      </div>
-    </div>
-  )
-}
 
 export function Home() {
   const featuresRef = useReveal<HTMLUListElement>()
+  const heroRef = useRef<HTMLElement>(null)
   const scrollToFeatures = () => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })
 
   return (
     <>
-      {/* Hero */}
-      <section className="border-b border-slate-200 bg-white dark:border-deep-line dark:bg-deep">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 sm:px-6 sm:py-24 lg:min-h-[calc(100svh-5rem)] lg:grid-cols-[1.2fr_1fr] lg:gap-12 lg:py-28">
+      {/* Hero: on large screens it is pinned while the extra height scrolls, riding the elevator down. */}
+      <section ref={heroRef} className="border-b border-slate-200 bg-white lg:motion-safe:h-[250vh] dark:border-deep-line dark:bg-deep">
+        <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 sm:px-6 sm:py-24 lg:sticky lg:top-20 lg:h-[calc(100svh-5rem)] lg:grid-cols-[1.2fr_1fr] lg:gap-12 lg:py-10">
           <div>
             <h1 className="hero-rise text-[44px] leading-[1.02] font-bold tracking-[-0.03em] text-petrol sm:text-6xl lg:text-[64px] xl:text-[76px] dark:text-offwhite">
               <span className="block sm:whitespace-nowrap">
@@ -62,8 +43,8 @@ export function Home() {
             </div>
           </div>
 
-          <div className="hero-rise relative mx-auto w-full max-w-sm lg:-top-10 lg:max-w-md" style={{ '--hero-delay': '200ms' } as CSSProperties}>
-            <HeroIllustration />
+          <div className="hero-rise mx-auto flex h-[22rem] w-full max-w-sm justify-center lg:h-[calc((100svh-10rem)*0.65)] lg:max-w-none lg:-translate-y-12" style={{ '--hero-delay': '200ms' } as CSSProperties}>
+            <ElevatorIllustration trackRef={heroRef} />
           </div>
         </div>
       </section>

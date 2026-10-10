@@ -41,8 +41,6 @@ export const hero = {
   line2: { text: 'To', highlight: 'Full Control' },
   subtitle: 'Information System for the Management and Inspection of Municipal Elevators',
   cta: 'Learn more',
-  /** Decorative illustration on the right: src/assets/hero.svg/1.png (light mode) and 2.png (dark mode). */
-  illustration: 'src/assets/hero.svg/1.png · 2.png',
 }
 
 export const links = {
