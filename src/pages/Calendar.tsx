@@ -1,5 +1,6 @@
 import { PageHeader, Section } from '../components/Section'
 import { schedule, type ScheduleRow, type Task } from '../data/site'
+import { useReveal } from '../lib/reveal'
 
 /** Length of the run of rows starting at `i` that share the same key (like merged cells in the spreadsheet). */
 function spanAt(i: number, key: (r: ScheduleRow) => string) {
@@ -37,6 +38,8 @@ const cell = 'border border-slate-200 px-4 py-3 align-top dark:border-deep-line'
 const groupCell = `${cell} bg-offwhite font-semibold text-petrol dark:bg-deep-card dark:text-offwhite`
 
 export function Calendar() {
+  const tbodyRef = useReveal<HTMLTableSectionElement>('.reveal-row', { stagger: true })
+
   return (
     <>
       <PageHeader
@@ -53,12 +56,12 @@ export function Calendar() {
                 <th scope="col" className="px-4 py-3 font-semibold">Tasks</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody ref={tbodyRef}>
               {schedule.map((row, i) => {
                 const phaseSpan = spanAt(i, phaseOf)
 
                 return (
-                  <tr key={i}>
+                  <tr key={i} className="reveal-row">
                     {phaseSpan > 0 && (
                       <th scope="row" rowSpan={phaseSpan} className={groupCell}>
                         {row.phase}

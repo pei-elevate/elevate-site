@@ -1,7 +1,7 @@
 import { ChevronDown, Menu, Moon, Sun, X } from 'lucide-react'
 import { useEffect, useRef, useState, type MouseEvent as ReactMouseEvent } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { milestones, resources } from '../data/site'
+import { allMilestones, resources } from '../data/site'
 import { useTheme } from '../lib/theme'
 import { resourceIcons } from './BrandIcons'
 import { Logo } from './Logo'
@@ -14,7 +14,7 @@ const mainLinks = [
 ]
 
 const linkBase =
-  'rounded-md px-3 py-2 text-[15px] font-medium transition-colors hover:text-petrol-600 dark:hover:text-accent'
+  'rounded-md px-3 py-2 text-base font-medium transition-colors hover:text-petrol-600 dark:hover:text-accent'
 const linkIdle = 'text-petrol/80 dark:text-offwhite/85'
 const linkActive = 'text-petrol underline decoration-accent decoration-2 underline-offset-8 dark:text-accent'
 
@@ -69,8 +69,23 @@ function ResourceIcons() {
 function MilestonesDropdown() {
   const [open, setOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
+  const closeTimer = useRef<number | undefined>(undefined)
   const { pathname } = useLocation()
   const active = pathname.startsWith('/milestones')
+
+  // Open on hover; close after a short delay so the pointer can reach the menu.
+  const openNow = () => {
+    window.clearTimeout(closeTimer.current)
+    setOpen(true)
+  }
+  const closeSoon = () => {
+    window.clearTimeout(closeTimer.current)
+    closeTimer.current = window.setTimeout(() => setOpen(false), 150)
+  }
+  useEffect(() => () => window.clearTimeout(closeTimer.current), [])
+
+  // Close the menu whenever the route changes.
+  useEffect(() => setOpen(false), [pathname])
 
   useEffect(() => {
     if (!open) return
@@ -87,37 +102,54 @@ function MilestonesDropdown() {
   }, [open])
 
   return (
-    <div ref={ref} className="relative">
+    <div ref={ref} onMouseEnter={openNow} onMouseLeave={closeSoon} className="relative flex items-center">
+      {/* The label opens the overview page; hovering (or the chevron, on touch/keyboard) opens the quick menu. */}
+      <Link to="/milestones" className={`${linkBase} ${active ? linkActive : linkIdle} pr-0.5`}>
+        Milestones
+      </Link>
       <button
         type="button"
         aria-haspopup="true"
         aria-expanded={open}
+        aria-label="Open milestones menu"
         onClick={() => setOpen((o) => !o)}
-        className={`${linkBase} ${active ? linkActive : linkIdle} inline-flex items-center gap-1`}
+        className={`${linkBase} ${active ? 'text-petrol dark:text-accent' : linkIdle} pr-2 pl-0.5`}
       >
-        Milestones
         <ChevronDown size={16} aria-hidden="true" className={`transition-transform ${open ? 'rotate-180' : ''}`} />
       </button>
       {open && (
-        <ul
-          onClick={closeOnLink(setOpen)}
-          className="menu-enter absolute left-0 z-50 mt-2 w-64 overflow-hidden rounded-xl border border-slate-200 bg-white py-1 shadow-lg dark:border-deep-line dark:bg-deep-card">
-          {milestones.map((m) => (
-            <li key={m.id}>
-              <NavLink
-                to={`/milestones/${m.id}`}
-                className={({ isActive }) =>
-                  `flex items-baseline gap-3 px-4 py-2.5 text-sm transition-colors hover:bg-petrol/5 dark:hover:bg-white/5 ${
-                    isActive ? 'text-petrol dark:text-accent' : 'text-slate-700 dark:text-offwhite/90'
-                  }`
-                }
-              >
-                <span className="font-semibold text-petrol dark:text-accent">{m.code}</span>
-                {m.name}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
+        // pt-2 keeps the hover area continuous between the button and the menu.
+        <div className="absolute top-full left-0 z-50 pt-2">
+          <ul
+            onClick={closeOnLink(setOpen)}
+            className="menu-enter w-64 overflow-hidden rounded-xl border border-slate-200 bg-white py-1 shadow-lg dark:border-deep-line dark:bg-deep-card">
+            {allMilestones.map((m) => (
+              <li key={m.id}>
+                {m.hidden ? (
+                  <span className="flex items-baseline gap-3 px-4 py-2.5 text-sm text-slate-400 dark:text-offwhite/40">
+                    <span className="font-semibold">{m.code}</span>
+                    {m.name}
+                    <span className="ml-auto self-center rounded-full bg-accent/20 px-2 py-0.5 text-[11px] font-semibold text-petrol/70 dark:text-accent/80">
+                      Soon
+                    </span>
+                  </span>
+                ) : (
+                  <NavLink
+                    to={`/milestones/${m.id}`}
+                    className={({ isActive }) =>
+                      `flex items-baseline gap-3 px-4 py-2.5 text-sm transition-colors hover:bg-petrol/5 dark:hover:bg-white/5 ${
+                        isActive ? 'text-petrol dark:text-accent' : 'text-slate-700 dark:text-offwhite/90'
+                      }`
+                    }
+                  >
+                    <span className="font-semibold text-petrol dark:text-accent">{m.code}</span>
+                    {m.name}
+                  </NavLink>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </div>
   )
@@ -147,10 +179,10 @@ export function Navbar() {
           : 'border-slate-200 bg-white dark:border-transparent dark:bg-deep'
       }`}
     >
-      <nav aria-label="Main" className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
+      <nav aria-label="Main" className="mx-auto flex h-20 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
         <Link to="/" aria-label="elevate – home" className="shrink-0">
           <Logo
-            className={`w-28 origin-left motion-safe:transition-transform motion-safe:duration-300 ${scrolled ? 'scale-90' : ''}`}
+            className={`w-32 origin-left motion-safe:transition-transform motion-safe:duration-300 ${scrolled ? 'scale-90' : ''}`}
           />
         </Link>
 
@@ -197,14 +229,27 @@ export function Navbar() {
                 {l.label}
               </NavLink>
             ))}
-            <p className="mt-2 px-3 text-xs font-semibold tracking-widest text-petrol/60 uppercase dark:text-offwhite/60">
+            <NavLink
+              to="/milestones"
+              end
+              className="mt-2 px-3 text-xs font-semibold tracking-widest text-petrol/60 uppercase hover:text-petrol dark:text-offwhite/60 dark:hover:text-offwhite"
+            >
               Milestones
-            </p>
-            {milestones.map((m) => (
-              <NavLink key={m.id} to={`/milestones/${m.id}`} className={navClass}>
-                <span className="font-semibold">{m.code}</span> · {m.name}
-              </NavLink>
-            ))}
+            </NavLink>
+            {allMilestones.map((m) =>
+              m.hidden ? (
+                <span key={m.id} className={`${linkBase} text-slate-400 dark:text-offwhite/40`}>
+                  <span className="font-semibold">{m.code}</span> · {m.name}
+                  <span className="ml-2 rounded-full bg-accent/20 px-2 py-0.5 text-[11px] font-semibold text-petrol/70 dark:text-accent/80">
+                    Soon
+                  </span>
+                </span>
+              ) : (
+                <NavLink key={m.id} to={`/milestones/${m.id}`} className={navClass}>
+                  <span className="font-semibold">{m.code}</span> · {m.name}
+                </NavLink>
+              ),
+            )}
             <NavLink to="/documentation" className={`${navClass({ isActive: pathname === '/documentation' })} mt-2`}>
               Documentation
             </NavLink>

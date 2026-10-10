@@ -1,4 +1,5 @@
 import { User } from 'lucide-react'
+import type { CSSProperties } from 'react'
 import { isPlaceholder, type Feature, type Person } from '../data/site'
 import { GitHubIcon, LinkedInIcon } from './BrandIcons'
 import { SmartLink } from './SmartLink'
@@ -94,10 +95,11 @@ export function ProfileCard({ person }: { person: Person }) {
 export function ProfileGrid({ people }: { people: Person[] }) {
   return (
     <ul className="flex flex-wrap justify-center gap-5">
-      {people.map((p) => (
+      {people.map((p, i) => (
         <li
           key={p.name}
-          className="w-[calc((100%-1.25rem)/2)] sm:w-[calc((100%-2.5rem)/3)] lg:w-[calc((100%-5rem)/5)]"
+          className="card-rise w-[calc((100%-1.25rem)/2)] sm:w-[calc((100%-2.5rem)/3)] lg:w-[calc((100%-5rem)/5)]"
+          style={{ '--card-delay': `${i * 100}ms` } as CSSProperties}
         >
           <ProfileCard person={p} />
         </li>

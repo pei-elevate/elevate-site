@@ -303,7 +303,8 @@ export interface Milestone {
   hidden?: boolean
 }
 
-const allMilestones: Milestone[] = [
+/** Every milestone, including the hidden ones (shown as "coming soon" on the overview). */
+export const allMilestones: Milestone[] = [
   {
     id: 'm1',
     code: 'M1',
@@ -436,7 +437,7 @@ const allMilestones: Milestone[] = [
     code: 'M2',
     name: 'Elaboration',
     summary: 'System architecture, data model, requirements and mockups.',
-    date: '[M2 DATE]',
+    date: '13/10/2026',
     canvaEmbedUrl: '[CANVA EMBED LINK M2]',
     sections: [
       { title: 'Overview', body: ['[M2 CONTENT]'] },
@@ -450,7 +451,7 @@ const allMilestones: Milestone[] = [
     code: 'M3',
     name: 'Construction',
     summary: 'Implementation of the MVP and the extended features.',
-    date: '[M3 DATE]',
+    date: '03/11/2026',
     canvaEmbedUrl: '[CANVA EMBED LINK M3]',
     sections: [
       { title: 'Overview', body: ['[M3 CONTENT]'] },
@@ -463,7 +464,7 @@ const allMilestones: Milestone[] = [
     code: 'M4',
     name: 'Transition',
     summary: 'Testing with the CMA, deployment and final documentation.',
-    date: '[M4 DATE]',
+    date: '15/12/2026',
     canvaEmbedUrl: '[CANVA EMBED LINK M4]',
     sections: [
       { title: 'Overview', body: ['[M4 CONTENT]'] },

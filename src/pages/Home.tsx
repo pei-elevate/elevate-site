@@ -34,7 +34,7 @@ export function Home() {
     <>
       {/* Hero */}
       <section className="border-b border-slate-200 bg-white dark:border-deep-line dark:bg-deep">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 sm:px-6 sm:py-24 lg:min-h-[calc(100svh-4rem)] lg:grid-cols-[1.2fr_1fr] lg:gap-12 lg:py-28">
+        <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 sm:px-6 sm:py-24 lg:min-h-[calc(100svh-5rem)] lg:grid-cols-[1.2fr_1fr] lg:gap-12 lg:py-28">
           <div>
             <h1 className="hero-rise text-[44px] leading-[1.02] font-bold tracking-[-0.03em] text-petrol sm:text-6xl lg:text-[64px] xl:text-[76px] dark:text-offwhite">
               <span className="block sm:whitespace-nowrap">

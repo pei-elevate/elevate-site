@@ -7,6 +7,7 @@ import { Calendar } from './pages/Calendar'
 import { Documentation } from './pages/Documentation'
 import { Home } from './pages/Home'
 import { Milestone } from './pages/Milestone'
+import { Milestones } from './pages/Milestones'
 import { MinuteDetail, MinutesList } from './pages/Minutes'
 import { NotFound } from './pages/NotFound'
 import { Team } from './pages/Team'
@@ -30,6 +31,7 @@ function AnimatedRoutes() {
         <Route path="/minutes/:slug" element={<MinuteDetail />} />
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/team" element={<Team />} />
+        <Route path="/milestones" element={<Milestones />} />
         <Route path="/milestones/:id" element={<Milestone />} />
         <Route path="/documentation" element={<Documentation />} />
         <Route path="*" element={<NotFound />} />

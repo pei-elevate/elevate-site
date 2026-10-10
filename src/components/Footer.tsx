@@ -29,7 +29,7 @@ function NameList({ people }: { people: Person[] }) {
             {href ? (
               <SmartLink
                 href={href}
-                className="transition-colors hover:text-petrol hover:underline hover:decoration-accent hover:decoration-2 hover:underline-offset-4 dark:hover:text-accent"
+                className="transition-colors hover:text-amber-500 dark:hover:text-accent"
               >
                 {p.name}
               </SmartLink>
@@ -63,7 +63,7 @@ export function Footer() {
                   <li key={r.key}>
                     <SmartLink
                       href={r.href}
-                      className="inline-flex items-center gap-2 transition-colors hover:text-petrol hover:underline hover:decoration-accent hover:decoration-2 hover:underline-offset-4 dark:hover:text-accent"
+                      className="inline-flex items-center gap-2 transition-colors hover:text-amber-500 dark:hover:text-accent"
                     >
                       <Icon size={16} />
                       {r.label}
