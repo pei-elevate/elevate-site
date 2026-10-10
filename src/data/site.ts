@@ -219,6 +219,7 @@ export const schedule: ScheduleRow[] = [
     phase: 'Elaboration',
     weeks: '06/10 – 12/10',
     tasks: [
+      'Use Case Diagram (Claudino)',
       'Design Mockups (Claudino & Martim)',
       'Refined State-of-the-art (Martim)',
       'Refined Architecture (Simão & Rodrigo)',

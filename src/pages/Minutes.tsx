@@ -1,12 +1,13 @@
 import { ArrowLeft, ArrowRight, ChevronLeft, ChevronRight, Download, Eye, FileText } from 'lucide-react'
 import Markdown from 'react-markdown'
+import type { CSSProperties } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
 import remarkGfm from 'remark-gfm'
 import { PageHeader, Section, cardClass } from '../components/Section'
 import { findMinute, minutes } from '../lib/minutes'
 import { NotFound } from './NotFound'
 
-const PAGE_SIZE = 5
+const PAGE_SIZE = 10
 
 function formatDate(date: string) {
   const d = new Date(`${date}T00:00:00`)
@@ -56,11 +57,22 @@ export function MinutesList() {
                     </th>
                   </tr>
                 </thead>
-                <tbody>
-                  {rows.map((m) => (
-                    <tr key={m.slug} className="border-t border-slate-200 dark:border-deep-line">
-                      <td className="px-4 py-3 font-bold text-petrol dark:text-accent">{pad(m.number)}</td>
-                      <td className="px-4 py-3 whitespace-nowrap">
+                {/* Keyed by page so the rows cascade in again when the page changes. */}
+                <tbody key={page}>
+                  {rows.map((m, i) => (
+                    <tr
+                      key={m.slug}
+                      className="row-enter group border-t border-slate-200 transition-colors duration-200 hover:bg-accent/10 dark:border-deep-line dark:hover:bg-white/5"
+                      style={{ '--row-delay': `${i * 60}ms` } as CSSProperties}
+                    >
+                      <td className="relative px-4 py-3 font-bold text-petrol dark:text-accent">
+                        <span
+                          aria-hidden="true"
+                          className="absolute inset-y-0 left-0 w-1 origin-center scale-y-0 bg-accent transition-transform duration-200 group-hover:scale-y-100"
+                        />
+                        <span className="inline-block transition-transform duration-200 group-hover:translate-x-1.5">{pad(m.number)}</span>
+                      </td>
+                      <td className="px-4 py-3 whitespace-nowrap transition-colors duration-200 group-hover:text-petrol dark:group-hover:text-offwhite">
                         {m.date && <time dateTime={m.date}>{formatDate(m.date)}</time>}
                       </td>
                       <td className="px-4 py-3">
