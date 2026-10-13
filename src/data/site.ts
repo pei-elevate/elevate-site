@@ -636,7 +636,7 @@ export const allMilestones: Milestone[] = [
           'Interactive prototype and interface designs developed in Figma for the elevator management and inspection workflows.',
         ],
         embed: {
-          url: 'https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FHj3576kcAcheAKotksmWKM%2FMockups-Elevate%3Fnode-id%3D74-2632',
+          url: 'https://embed.figma.com/design/Hj3576kcAcheAKotksmWKM/Mockups-Elevate?node-id=74-2632&embed-host=share',
           title: 'Elevate Figma Mockups',
           height: 600,
           externalUrl: 'https://www.figma.com/design/Hj3576kcAcheAKotksmWKM/Mockups-Elevate?node-id=74-2632&t=yvJMrVvfXIhs9Y4B-1',

@@ -41,7 +41,7 @@ function FigureImage({ image }: { image: MilestoneImage }) {
   const imgSrc = image.src.startsWith('/') ? `.${image.src}` : image.src
   return (
     <figure
-      className="mt-4 w-full overflow-hidden rounded-xl border border-slate-200 bg-white p-2 dark:border-deep-line dark:bg-deep-card"
+      className="mt-4 w-full overflow-hidden rounded-xl border border-slate-200 bg-white p-2 shadow-sm dark:border-deep-line dark:bg-white"
       style={image.width ? { maxWidth: image.width + 18 } : undefined}
     >
       <a
@@ -56,7 +56,7 @@ function FigureImage({ image }: { image: MilestoneImage }) {
           alt={image.alt}
           width={image.width}
           height={image.height}
-          className="h-auto w-full rounded-lg object-contain"
+          className="h-auto w-full rounded-lg bg-white object-contain"
           loading="lazy"
         />
       </a>
