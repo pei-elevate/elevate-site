@@ -1,7 +1,14 @@
-import { ArrowLeft, ArrowRight, Presentation } from 'lucide-react'
+import { ArrowLeft, ArrowRight, ExternalLink, FileText, Presentation } from 'lucide-react'
 import { Link, useParams } from 'react-router-dom'
 import { PageHeader, Section, cardClass } from '../components/Section'
-import { isPlaceholder, milestones, type Milestone as MilestoneData, type MilestoneSection } from '../data/site'
+import {
+  isPlaceholder,
+  milestones,
+  type Milestone as MilestoneData,
+  type MilestoneImage,
+  type MilestoneSection,
+  type MilestoneSubsection,
+} from '../data/site'
 import { NotFound } from './NotFound'
 
 function CanvaEmbed({ milestone }: { milestone: MilestoneData }) {
@@ -30,6 +37,110 @@ function CanvaEmbed({ milestone }: { milestone: MilestoneData }) {
   )
 }
 
+function FigureImage({ image }: { image: MilestoneImage }) {
+  const imgSrc = image.src.startsWith('/') ? `.${image.src}` : image.src
+  return (
+    <figure
+      className="mt-4 w-full overflow-hidden rounded-xl border border-slate-200 bg-white p-2 dark:border-deep-line dark:bg-deep-card"
+      style={image.width ? { maxWidth: image.width + 18 } : undefined}
+    >
+      <a
+        href={imgSrc}
+        target="_blank"
+        rel="noopener noreferrer"
+        title="Click to view full resolution"
+        className="block cursor-zoom-in"
+      >
+        <img
+          src={imgSrc}
+          alt={image.alt}
+          width={image.width}
+          height={image.height}
+          className="h-auto w-full rounded-lg object-contain"
+          loading="lazy"
+        />
+      </a>
+    </figure>
+  )
+}
+
+function SubsectionBlock({ subsection }: { subsection: MilestoneSubsection }) {
+  return (
+    <div className="space-y-4 rounded-2xl border border-slate-200/80 bg-white/70 p-6 shadow-sm dark:border-deep-line dark:bg-deep-card/40">
+      <h3 className="text-xl font-semibold text-petrol dark:text-offwhite">{subsection.title}</h3>
+      {subsection.body?.map((p) => (
+        <p key={p} className="text-[16px] leading-relaxed text-slate-700 dark:text-slate-300">
+          {p}
+        </p>
+      ))}
+      {subsection.items && (
+        <ul className="list-disc space-y-2 pl-5 marker:text-accent">
+          {subsection.items.map((i) => {
+            const colonIndex = i.indexOf(': ')
+            if (colonIndex !== -1) {
+              const name = i.slice(0, colonIndex)
+              const desc = i.slice(colonIndex + 2)
+              return (
+                <li key={i}>
+                  <strong className="font-semibold text-slate-900 dark:text-offwhite">{name}:</strong>{' '}
+                  <span>{desc}</span>
+                </li>
+              )
+            }
+            return <li key={i}>{i}</li>
+          })}
+        </ul>
+      )}
+      {subsection.groups && (
+        <div className="space-y-5 pt-1">
+          {subsection.groups.map((group) => (
+            <div key={group.title} className="space-y-2">
+              <h4 className="text-base font-semibold text-secondary">{group.title}</h4>
+              <ul className="list-disc space-y-2 pl-5 marker:text-accent">
+                {group.items.map((item) => {
+                  const colonIndex = item.indexOf(': ')
+                  if (colonIndex !== -1) {
+                    const name = item.slice(0, colonIndex)
+                    const desc = item.slice(colonIndex + 2)
+                    return (
+                      <li key={item}>
+                        <strong className="font-semibold text-slate-900 dark:text-offwhite">{name}:</strong>{' '}
+                        <span>{desc}</span>
+                      </li>
+                    )
+                  }
+                  return <li key={item}>{item}</li>
+                })}
+              </ul>
+            </div>
+          ))}
+        </div>
+      )}
+      {subsection.image && <FigureImage image={subsection.image} />}
+      {subsection.images && (
+        <div className="grid gap-4 sm:grid-cols-2">
+          {subsection.images.map((img) => (
+            <FigureImage key={img.src} image={img} />
+          ))}
+        </div>
+      )}
+      {subsection.pdf && (
+        <div className="pt-2">
+          <a
+            href={subsection.pdf.src}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-full bg-petrol px-5 py-2.5 font-semibold text-white transition-colors hover:bg-petrol-600 dark:bg-accent dark:text-petrol dark:hover:bg-accent/90"
+          >
+            <FileText size={18} aria-hidden="true" />
+            {subsection.pdf.label}
+          </a>
+        </div>
+      )}
+    </div>
+  )
+}
+
 function SectionBlock({ section }: { section: MilestoneSection }) {
   return (
     <section className="border-t border-slate-200 pt-10 dark:border-deep-line">
@@ -43,17 +154,28 @@ function SectionBlock({ section }: { section: MilestoneSection }) {
         ))}
         {section.items && (
           <ul className="list-disc space-y-2 pl-5 marker:text-accent">
-            {section.items.map((i) => (
-              <li key={i}>{i}</li>
-            ))}
+            {section.items.map((i) => {
+              const colonIndex = i.indexOf(': ')
+              if (colonIndex !== -1) {
+                const name = i.slice(0, colonIndex)
+                const desc = i.slice(colonIndex + 2)
+                return (
+                  <li key={i}>
+                    <strong className="font-semibold text-slate-900 dark:text-offwhite">{name}:</strong>{' '}
+                    <span>{desc}</span>
+                  </li>
+                )
+              }
+              return <li key={i}>{i}</li>
+            })}
           </ul>
         )}
         {section.cards && (
-          <ul className="grid gap-4 pt-2 sm:grid-cols-3">
+          <ul className="grid gap-4 pt-2 sm:grid-cols-3 lg:grid-cols-5">
             {section.cards.map((c) => (
-              <li key={c.title} className={cardClass}>
+              <li key={c.title} className={`${cardClass} flex flex-col justify-center text-center`}>
                 <h3 className="font-semibold text-secondary">{c.title}</h3>
-                <p className="mt-2 text-[15px]">{c.description}</p>
+                {c.description && <p className="mt-2 text-[15px]">{c.description}</p>}
               </li>
             ))}
           </ul>
@@ -83,25 +205,63 @@ function SectionBlock({ section }: { section: MilestoneSection }) {
             ))}
           </div>
         )}
-        {section.image?.src && (
-          <figure
-            className="mt-4 w-full overflow-hidden rounded-xl border border-slate-200 bg-white p-2 dark:border-deep-line dark:bg-deep-card"
-            style={section.image.width ? { maxWidth: section.image.width + 18 } : undefined}
-          >
-            <img
-              src={section.image.src.startsWith('/') ? `.${section.image.src}` : section.image.src}
-              alt={section.image.alt}
-              width={section.image.width}
-              height={section.image.height}
-              className="h-auto w-full rounded-lg object-contain"
-              loading="lazy"
-            />
-            {section.image.caption && (
-              <figcaption className="mt-2 text-center text-sm text-slate-500 dark:text-slate-400">
-                {section.image.caption}
-              </figcaption>
+        {section.image?.src && <FigureImage image={section.image} />}
+        {section.images && (
+          <div className="space-y-6 pt-2">
+            {section.images.map((img) => (
+              <FigureImage key={img.src} image={img} />
+            ))}
+          </div>
+        )}
+        {section.subsections && (
+          <div className="space-y-6 pt-2">
+            {section.subsections.map((sub) => (
+              <SubsectionBlock key={sub.title} subsection={sub} />
+            ))}
+          </div>
+        )}
+        {section.pdf && (
+          <div className="pt-2">
+            <a
+              href={section.pdf.src}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-petrol px-5 py-2.5 font-semibold text-white transition-colors hover:bg-petrol-600 dark:bg-accent dark:text-petrol dark:hover:bg-accent/90"
+            >
+              <FileText size={18} aria-hidden="true" />
+              {section.pdf.label}
+            </a>
+          </div>
+        )}
+        {section.embed && (
+          <div className="space-y-3 pt-2">
+            <div
+              className="relative w-full overflow-hidden rounded-2xl border border-slate-200 bg-white dark:border-deep-line dark:bg-deep-card"
+              style={{ height: section.embed.height ?? 540 }}
+            >
+              <iframe
+                src={section.embed.url}
+                title={section.embed.title ?? 'Interactive Embed'}
+                loading="lazy"
+                allow="fullscreen"
+                allowFullScreen
+                className="absolute inset-0 size-full border-0"
+              />
+            </div>
+            {section.embed.externalUrl && (
+              <div className="flex justify-end">
+                <a
+                  href={section.embed.externalUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-petrol/30 px-4 py-2 text-sm font-semibold text-petrol transition-colors hover:border-petrol hover:bg-petrol hover:text-white dark:border-accent/40 dark:text-accent dark:hover:border-accent dark:hover:bg-accent dark:hover:text-petrol"
+                >
+                  <ExternalLink size={16} aria-hidden="true" />
+                  {section.embed.externalLabel ?? 'Open in External Tool'}
+                </a>
+              </div>
             )}
-          </figure>
+          </div>
         )}
       </div>
     </section>

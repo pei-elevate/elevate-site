@@ -27,7 +27,7 @@ export const project = {
   course: 'Projeto em Engenharia Informática',
   university: 'Universidade de Aveiro',
   client: 'Câmara Municipal de Aveiro',
-  academicYear: '[ACADEMIC YEAR]',
+  academicYear: '2026/2027',
   copyright: '© Copyright 2026 elevate. All rights reserved.',
 }
 
@@ -230,18 +230,24 @@ export const schedule: ScheduleRow[] = [
     type: 'period',
     phase: 'Construction',
     weeks: '14/10 – 20/10',
-    tasks: ['Legal Requirements', 'Technical Risks', 'Risk Mitigation'],
+    tasks: [
+      'Heuristic Evaluation (Claudino & Simão)',
+      'WCAG Accessibility Audit (Simão & Rodrigo)',
+      'Color Contrast Review (Martim & Gonçalo)',
+      'Keyboard & Screen Reader Check (Gonçalo & Rodrigo)',
+    ],
   },
   {
     type: 'period',
     phase: 'Construction',
-    weeks: '20/10 – 02/11',
+    weeks: '21/10 – 02/11',
     tasks: [
-      'SWOT Analysis',
-      'TOWS Matrix',
-      'PESTEL Analysis',
-      'MVP Elevator Registry',
-      'MVP Inspections Lifecycle',
+      'Mockup Iteration (Claudino & Martim)',
+      'Usability Tests (Claudino & Rodrigo)',
+      'User Feedback Session (CMA) (All)',
+      'MVP Elevator Registry (Gonçalo & Simão)',
+      'MVP Inspections Lifecycle (Rodrigo, Martim & Claudino)',
+      'Presentation (All)',
     ],
   },
   { type: 'milestone', phase: 'Construction', code: 'M3', date: '03/11' },
@@ -274,6 +280,25 @@ export const schedule: ScheduleRow[] = [
 // Milestones
 // ---------------------------------------------------------------------------
 
+export interface MilestoneImage {
+  src: string
+  alt: string
+  width?: number
+  height?: number
+  caption?: string
+}
+
+export interface MilestoneSubsection {
+  title: string
+  body?: string[]
+  items?: string[]
+  cards?: { title: string; description?: string }[]
+  groups?: { title: string; items: string[] }[]
+  image?: MilestoneImage
+  images?: MilestoneImage[]
+  pdf?: { src: string; label: string }
+}
+
 export interface MilestoneSection {
   title: string
   /** Paragraphs of text. */
@@ -281,11 +306,19 @@ export interface MilestoneSection {
   /** Bullet list. */
   items?: string[]
   /** Titled cards (used for actors). */
-  cards?: { title: string; description: string }[]
+  cards?: { title: string; description?: string }[]
   /** Grouped lists by category (used for use cases by actor). */
   groups?: { title: string; items: string[] }[]
   /** Optional image (e.g. for State of the Art diagram or chart). */
-  image?: { src: string; alt: string; width?: number; height?: number; caption?: string }
+  image?: MilestoneImage
+  /** Optional multiple images. */
+  images?: MilestoneImage[]
+  /** Optional subsections. */
+  subsections?: MilestoneSubsection[]
+  /** Optional interactive embed (e.g. Figma). */
+  embed?: { url: string; title?: string; height?: number; externalUrl?: string; externalLabel?: string }
+  /** Optional download or external PDF link. */
+  pdf?: { src: string; label: string }
 }
 
 export interface Milestone {
@@ -431,16 +464,185 @@ export const allMilestones: Milestone[] = [
   },
   {
     id: 'm2',
-    hidden: true,
     code: 'M2',
     name: 'Elaboration',
     summary: 'System architecture, data model, requirements and mockups.',
     date: '13/10/2026',
-    canvaEmbedUrl: '[CANVA EMBED LINK M2]',
+    canvaEmbedUrl: 'https://www.canva.com/design/DAHW_WUz0vM/Td1x_Hw1ZW-hLByt1Slv3g/view?embed',
     sections: [
-      { title: 'Overview', body: ['[M2 CONTENT]'] },
-      { title: 'Architecture', body: ['[M2 ARCHITECTURE]'] },
-      { title: 'Mockups', body: ['[M2 MOCKUPS]'] },
+      {
+        title: 'Goal',
+        body: [
+          "Develop a system to manage the municipality's elevators, from their registration to inspection requests and follow-up.",
+        ],
+      },
+      {
+        title: 'State of the Art',
+        images: [
+          {
+            src: './images/SotaAtualizado.png',
+            alt: 'State of the Art Comparison',
+            width: 700,
+          },
+          {
+            src: './images/sotaTecnologias.png',
+            alt: 'Technological Benchmark',
+            width: 700,
+          },
+        ],
+      },
+      {
+        title: 'Actors',
+        cards: [
+          { title: 'Elevator Owner' },
+          { title: 'CMA Urban Planning Staff' },
+          { title: 'CMA Elevator Manager Staff' },
+          { title: 'Inspection Company' },
+          { title: 'Maintenance Company' },
+        ],
+      },
+      {
+        title: 'Use Case Diagram',
+        image: {
+          src: './images/UseCaseDiagram.png',
+          alt: 'Use Case Diagram',
+        },
+      },
+      {
+        title: 'Functional Requirements',
+        groups: [
+          {
+            title: 'Shared (Elevator Owner, Maintenance Company & CMA Elevator Manager Staff)',
+            items: [
+              'Display Request / Inspection Status: The system shall display the current status, scheduled inspection date, and final result, when available, for each inspection request.',
+              'Display Elevator Information: The system shall display a list of all elevators according to the authenticated user, including their technical specifications, inspection history, and current legal compliance status.',
+            ],
+          },
+          {
+            title: 'Elevator Owner',
+            items: [
+              'Send inspection notices: The system shall automatically send an inspection reminder notification to the elevator owner and the maintenance company 60 days before the inspection deadline of each registered elevator.',
+            ],
+          },
+          {
+            title: 'Maintenance Company',
+            items: [
+              'Register Elevator: The system shall allow the maintenance company to register new elevators, saving them with the status "Pending validation" until they are reviewed by the CMA.',
+              'Manage Failed inspection: The system shall notify the maintenance company of the occurrence of failed inspections and the elevator owner when it’s resolved and ready for a re-inspection.',
+              'Complaint Registration: The system shall allow the maintenance company to register elevator anomalies, recording them in the elevator\'s history and notifying both the CMA staff and elevator owner.',
+            ],
+          },
+          {
+            title: 'CMA Staff (Urban Planning Sector)',
+            items: [
+              'Elevator Registration Notice: The system shall allow the CMA urban planning staff to register new elevator notices, and automatically notify the elevator manager staff.',
+            ],
+          },
+          {
+            title: 'CMA Staff (CMA Elevator Manager Staff)',
+            items: [
+              'Alert elevator notification without registration: The system shall allow the CMA elevator manager to send an alert to the owner of an existing elevator without registration and respective maintenance company.',
+              'Review Elevator Registration: The system shall allow the elevator manager to review pending registrations, change their associated elevator notice if needed, and approve them (assigning an internal reference) or reject them with a reason.',
+              'Display Failed Inspections and Re-inspections: The system shall display a list of failed inspections, their substatus and the corresponding re-inspection status.',
+              'Search and Filter Elevators / Inspections: The system shall allow the CMA elevator manager to search and filter elevators and their corresponding inspections.',
+              'Display Indicators and Operational Statistics: The system shall display a cumulative information relative to all the elevators in the municipality, for example elevators by inspection status, failed inspections, etc.',
+            ],
+          },
+          {
+            title: 'Inspection Company',
+            items: [
+              'Display Assigned Inspections: The system shall display to the inspection company a list of elevators assigned for inspection.',
+              'Schedule Inspections: The system shall allow the inspection company to schedule inspection for pending requests, and inform the CMA staff, maintenance company and the owner of the scheduled date and time.',
+              'Submit Inspection Results and Reports: The system shall allow the inspection company to submit the inspection result (Approved or Failed) and the report, setting failed inspections to "Action required" and making the records available to the CMA staff, the maintenance company and the owner.',
+            ],
+          },
+        ],
+      },
+      {
+        title: 'Non Functional Requirements',
+        items: [
+          'Availability: The system should maintain at least 95% availability over a one-year period, excluding scheduled maintenance.',
+          'Security: The system should enforce role-based access control, ensuring that 100% of restricted actions are accessible only to authorized user roles during acceptance testing.',
+          'Data Integrity: The system should ensure zero duplicated or lost elevator and inspection records during acceptance testing.',
+          'Interoperability: The system should integrate with the municipality’s existing document management system and current request submission process without requiring modifications to those systems.',
+          'Compliance: All identified GDPR, municipal bylaw, and elevator inspection regulatory requirements should be validated before deployment.',
+        ],
+      },
+      {
+        title: 'System Architecture',
+        images: [
+          {
+            src: './images/arquiteturaSoftwareExtended.drawio.png',
+            alt: 'Extended Software Architecture Diagram',
+          },
+          {
+            src: './images/arquiteturaTecnologias.png',
+            alt: 'Technology Stack and Architecture Overview',
+          },
+        ],
+      },
+      {
+        title: 'Domain Model',
+        images: [
+          {
+            src: './images/elevate-db-page-1.png',
+            alt: 'Domain Model (Part 1)',
+          },
+          {
+            src: './images/elevate-db-page-2.png',
+            alt: 'Domain Model (Part 2)',
+          },
+          {
+            src: './images/elevate-db-page-3.png',
+            alt: 'Domain Model (Part 3)',
+          },
+        ],
+        pdf: {
+          src: './images/elevate-db (2).pdf',
+          label: 'Download Domain Model (PDF)',
+        },
+      },
+      {
+        title: 'Role Management – Flowchart',
+        image: {
+          src: './images/FlowChart.png',
+          alt: 'Role Management Flowchart',
+        },
+      },
+      {
+        title: 'Role Management – Architecture Workflow',
+        images: [
+          {
+            src: './images/workflow1.png',
+            alt: 'Architecture Workflow 1',
+          },
+          {
+            src: './images/workflow2.png',
+            alt: 'Architecture Workflow 2',
+          },
+          {
+            src: './images/workflow3.png',
+            alt: 'Architecture Workflow 3',
+          },
+          {
+            src: './images/workflow4.png',
+            alt: 'Architecture Workflow 4',
+          },
+        ],
+      },
+      {
+        title: 'Mockups',
+        body: [
+          'Interactive prototype and interface designs developed in Figma for the elevator management and inspection workflows.',
+        ],
+        embed: {
+          url: 'https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FHj3576kcAcheAKotksmWKM%2FMockups-Elevate%3Fnode-id%3D74-2632',
+          title: 'Elevate Figma Mockups',
+          height: 600,
+          externalUrl: 'https://www.figma.com/design/Hj3576kcAcheAKotksmWKM/Mockups-Elevate?node-id=74-2632&t=yvJMrVvfXIhs9Y4B-1',
+          externalLabel: 'Open in Figma',
+        },
+      },
     ],
   },
   {
