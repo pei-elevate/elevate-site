@@ -341,7 +341,7 @@ export const allMilestones: Milestone[] = [
     code: 'M1',
     name: 'Inception',
     summary:
-      'Project Vision, Problem, Expected Results, State of the Art, Actors, Functional Requirements, Non Functional Requirements and High-level Architecture.',
+      'Vision, problem, requirements and high-level architecture.',
     date: '29/09/2026',
     canvaEmbedUrl: 'https://www.canva.com/design/DAHWNwlLkFQ/OizVpoIOpeHJMS35WrAGVA/view?embed',
     sections: [
