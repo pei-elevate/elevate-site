@@ -231,10 +231,11 @@ export const schedule: ScheduleRow[] = [
     phase: 'Construction',
     weeks: '14/10 – 20/10',
     tasks: [
-      'Heuristic Evaluation (Claudino & Simão)',
+      'Heuristic Evaluation (Martim & Simão)',
       'WCAG Accessibility Audit (Simão & Rodrigo)',
-      'Color Contrast Review (Martim & Gonçalo)',
+      'Color Contrast Review (Claudino)',
       'Keyboard & Screen Reader Check (Gonçalo & Rodrigo)',
+      'Alteração do Calendário (Martim)',
     ],
   },
   {
