@@ -1,4 +1,5 @@
 import { ArrowLeft, ArrowRight, ExternalLink, FileText, Presentation } from 'lucide-react'
+import type { CSSProperties } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { PageHeader, Section, cardClass } from '../components/Section'
 import {
@@ -171,7 +172,11 @@ function SectionBlock({ section }: { section: MilestoneSection }) {
           </ul>
         )}
         {section.cards && (
-          <ul className="grid gap-4 pt-2 sm:grid-cols-3 lg:grid-cols-5">
+          // One column per card on large screens (up to five), so a short list still fills the row.
+          <ul
+            className="grid gap-4 pt-2 sm:grid-cols-3 lg:grid-cols-[repeat(var(--cols),minmax(0,1fr))]"
+            style={{ '--cols': Math.min(section.cards.length, 5) } as CSSProperties}
+          >
             {section.cards.map((c) => (
               <li key={c.title} className={`${cardClass} flex flex-col justify-center text-center`}>
                 <h3 className="font-semibold text-secondary">{c.title}</h3>
