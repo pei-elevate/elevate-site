@@ -235,7 +235,6 @@ export const schedule: ScheduleRow[] = [
       'WCAG Accessibility Audit (Simão & Rodrigo)',
       'Color Contrast Review (Claudino)',
       'Keyboard & Screen Reader Check (Gonçalo & Rodrigo)',
-      'Alteração do Calendário (Martim)',
     ],
   },
   {
@@ -243,7 +242,6 @@ export const schedule: ScheduleRow[] = [
     phase: 'Construction',
     weeks: '21/10 – 02/11',
     tasks: [
-      'Mockup Iteration (Claudino & Martim)',
       'Usability Tests (Claudino & Rodrigo)',
       'User Feedback Session (CMA) (All)',
       'MVP Elevator Registry (Gonçalo & Simão)',
