@@ -243,9 +243,10 @@ export const schedule: ScheduleRow[] = [
     weeks: '21/10 – 02/11',
     tasks: [
       'User Feedback Session (CMA) (All)',
-      'Accessibility Matrix & Mockup Iteration (Claudino & Martim)',
-      'Legal Requirements (GDPR, Licensing, Sector Regulation, T&C)',
-      'Technical Risks & Risk Mitigation',
+      'Accessibility Matrix (Rodrigo)',
+      'Mockup Iteration (Claudino & Martim)',
+      'Legal Requirements (GDPR, Licensing, Sector Regulation, T&C) (Claudino & Martim)',
+      'Technical Risks & Risk Mitigation (Gonçalo & Simão)',
       'Presentation (All)',
     ],
   },
@@ -254,7 +255,7 @@ export const schedule: ScheduleRow[] = [
     type: 'period',
     phase: 'Construction',
     weeks: '04/11 – 17/11',
-    tasks: ['MVP Elevator Registry', 'MVP Inspections Lifecycle', 'MVP User & Access', 'Usability Tests (SUS)'],
+    tasks: ['MVP Elevator Registry', 'MVP Inspections Lifecycle', 'MVP User & Access', 'Usability Scripts & Tests (SUS) (Simão)'],
   },
   {
     type: 'period',
