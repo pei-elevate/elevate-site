@@ -36,10 +36,13 @@ function CardContent({ milestone, footer }: { milestone: Milestone; footer: Reac
         />
       </div>
       <div className="flex flex-1 flex-col p-5">
-        <h2 className={`text-xl font-semibold ${soon ? 'text-slate-500 dark:text-slate-400' : 'text-petrol dark:text-offwhite'}`}>
+        <p className="text-xs font-semibold tracking-wide text-slate-500 uppercase dark:text-slate-400">
+          {milestone.phase}
+        </p>
+        <h2 className={`mt-1.5 text-xl font-semibold ${soon ? 'text-slate-500 dark:text-slate-400' : 'text-petrol dark:text-offwhite'}`}>
           {milestone.name}
         </h2>
-        <p className="mt-2 flex-1 text-[15px] leading-relaxed text-slate-600 dark:text-slate-300">{milestone.summary}</p>
+        <div className="flex-1" />
         <div className="mt-5 flex flex-wrap items-center justify-between gap-x-3 gap-y-2 text-sm">
           <span className="inline-flex items-center gap-1.5 text-slate-500 dark:text-slate-400">
             <CalendarDays size={16} aria-hidden="true" />
@@ -55,13 +58,13 @@ function CardContent({ milestone, footer }: { milestone: Milestone; footer: Reac
 export function Milestones() {
   return (
     <>
-      <PageHeader title="Milestones" intro="The project's four milestones, from inception to transition." />
+      <PageHeader title="Milestones" intro="The project's milestones, from inception to transition phase." />
       <Section>
         <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {allMilestones.map((m, i) => (
             <li key={m.id} className="hero-rise" style={{ '--hero-delay': `${i * 90}ms` } as CSSProperties}>
               {m.hidden ? (
-                <article aria-label={`${m.code} ${m.name}, coming soon`} className={`${cardBase} opacity-90`}>
+                <article aria-label={`${m.label}: ${m.name}, coming soon`} className={`${cardBase} opacity-90`}>
                   <CardContent milestone={m} footer={null} />
                 </article>
               ) : (

@@ -13,7 +13,7 @@ import {
 import { NotFound } from './NotFound'
 
 function CanvaEmbed({ milestone }: { milestone: MilestoneData }) {
-  const title = `${milestone.code} ${milestone.name} presentation`
+  const title = `${milestone.label}: ${milestone.name} presentation`
   return (
     <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-slate-200 bg-white dark:border-deep-line dark:bg-deep-card">
       {isPlaceholder(milestone.canvaEmbedUrl) ? (
@@ -284,9 +284,12 @@ export function Milestone() {
   return (
     <>
       <PageHeader
-        title={`${milestone.code} · ${milestone.name}`}
+        title={`${milestone.label} · ${milestone.name}`}
         intro={
           <>
+            <span className="mb-2 block text-sm font-semibold tracking-wide text-secondary uppercase">
+              Phase: {milestone.phase}
+            </span>
             <span className="block">{milestone.summary}</span>
             <span className="mt-1 block text-base text-slate-500 dark:text-slate-400">{milestone.date}</span>
           </>
@@ -307,7 +310,7 @@ export function Milestone() {
               className="inline-flex items-center gap-2 font-semibold text-petrol hover:underline hover:decoration-accent hover:decoration-2 hover:underline-offset-4 dark:text-accent"
             >
               <ArrowLeft size={18} aria-hidden="true" />
-              {prev.code} {prev.name}
+              {prev.label}: {prev.name}
             </Link>
           ) : (
             <span />
@@ -317,7 +320,7 @@ export function Milestone() {
               to={`/milestones/${next.id}`}
               className="inline-flex items-center gap-2 font-semibold text-petrol hover:underline hover:decoration-accent hover:decoration-2 hover:underline-offset-4 dark:text-accent"
             >
-              {next.code} {next.name}
+              {next.label}: {next.name}
               <ArrowRight size={18} aria-hidden="true" />
             </Link>
           )}

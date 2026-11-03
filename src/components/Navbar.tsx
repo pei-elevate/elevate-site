@@ -122,7 +122,7 @@ function MilestonesDropdown() {
         <div className="absolute top-full left-0 z-50 pt-2">
           <ul
             onClick={closeOnLink(setOpen)}
-            className="menu-enter w-64 overflow-hidden rounded-xl border border-slate-200 bg-white py-1 shadow-lg dark:border-deep-line dark:bg-deep-card">
+            className="menu-enter w-80 overflow-hidden rounded-xl border border-slate-200 bg-white py-1 shadow-lg dark:border-deep-line dark:bg-deep-card">
             {allMilestones.map((m) => (
               <li key={m.id}>
                 {m.hidden ? (

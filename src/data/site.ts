@@ -333,8 +333,14 @@ export interface MilestoneSection {
 
 export interface Milestone {
   id: 'm1' | 'm2' | 'm3' | 'm4'
+  /** Short code, e.g. "M1". */
   code: string
+  /** Full label, e.g. "Milestone 1". */
+  label: string
+  /** Milestone title (its topic). */
   name: string
+  /** RUP phase the milestone belongs to. */
+  phase: 'Inception' | 'Elaboration' | 'Construction' | 'Transition'
   summary: string
   date: string
   /** Canva "Embed" URL (Share → More → Embed → copy the src). Leave as a placeholder to show an empty frame. */
@@ -349,7 +355,9 @@ export const allMilestones: Milestone[] = [
   {
     id: 'm1',
     code: 'M1',
-    name: 'Inception',
+    label: 'Milestone 1',
+    name: 'Project Vision & Architecture',
+    phase: 'Inception',
     summary:
       'Vision, problem, requirements and high-level architecture.',
     date: '29/09/2026',
@@ -475,7 +483,9 @@ export const allMilestones: Milestone[] = [
   {
     id: 'm2',
     code: 'M2',
-    name: 'Elaboration',
+    label: 'Milestone 2',
+    name: 'Requirements & Design',
+    phase: 'Elaboration',
     summary: 'System architecture, data model, requirements and mockups.',
     date: '13/10/2026',
     canvaEmbedUrl: 'https://www.canva.com/design/DAHW_WUz0vM/Td1x_Hw1ZW-hLByt1Slv3g/view?embed',
@@ -659,8 +669,11 @@ export const allMilestones: Milestone[] = [
     id: 'm3',
     hidden: true,
     code: 'M3',
-    name: 'Construction',
-    summary: 'Implementation of the MVP and the extended features.',
+    label: 'Milestone 3',
+    name: 'Digital Accessibility & Usability',
+    phase: 'Construction',
+    summary:
+      'Heuristic evaluation, WCAG audit, user feedback with the CMA, legal requirements and technical risks.',
     date: '03/11/2026',
     canvaEmbedUrl: '[CANVA EMBED LINK M3]',
     sections: [
@@ -672,8 +685,10 @@ export const allMilestones: Milestone[] = [
     id: 'm4',
     hidden: true,
     code: 'M4',
-    name: 'Transition',
-    summary: 'Testing with the CMA, deployment and final documentation.',
+    label: 'Milestone 4',
+    name: 'MVP Showcase & Peer Review',
+    phase: 'Construction',
+    summary: 'First working MVP, presented to the supervisors, followed by peer evaluation.',
     date: '15/12/2026',
     canvaEmbedUrl: '[CANVA EMBED LINK M4]',
     sections: [
