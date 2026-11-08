@@ -306,7 +306,7 @@ export const schedule: ScheduleRow[] = [
   {
     type: 'period',
     phase: 'Construction',
-    weeks: '08/12 – 15/12',
+    weeks: '09/12 – 15/12',
     tasks: ['Integration Tests, Fixes & Presentation (All)'],
   },
   { type: 'milestone', phase: 'Construction', code: 'M4', date: '15/12' },
